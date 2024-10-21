@@ -1,0 +1,188 @@
+{% extends "v1/base.html" %}
+{% load static %}
+{% block content %}
+<br><br>
+
+<!-- Main Container -->
+<div class="container mt-5">
+    <div class="col-md-10 mx-auto shadow-lg p-4 rounded">
+
+        <!-- Table Heading -->
+        <h2 class="text-center mb-4">Available Travel Options</h2>
+
+        <!-- Flights Section -->
+        <h4 class="mt-4">Flights</h4>
+        <div class="table-responsive">
+            <table class="table table-hover text-center">
+                <thead class="table-dark">
+                    <tr>
+                        <th></th>
+                        <th>Airlines</th>
+                        <th>Number</th>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Price</th>
+                        <th>Class</th>
+                        <th>Book</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if fl_num != 0 %}
+                       {% for val in list_val %}
+                            {% if val.From == from_city and val.To == to %}
+                                <tr class="text-center align-middle">
+                                    <td><span class="glyphicon glyphicon-plane"></span></td>
+                                    <td>{{ val.airlines }}</td>
+                                    <td>{{ val.number }}</td>
+                                    <td>{{ val.From }}</td>
+                                    <td>{{ val.To }}</td>
+                                    <td>{{ val.Date }}</td>
+                                    <td>{{ val.Time|time:'g:i A' }}</td>
+                                    <td>Rs. {{ val.Price }}</td>
+                                    <td>{{ val.class_type }}</td>
+                                    {% if user.is_authenticated %}
+                                    <td><a href="{% url 'booking' val.id %}" class="btn btn-primary btn-md rounded">Book</a></td>
+                                    {% else %}
+                                    <td><a href="{% url 'login' %}" class="btn btn-primary btn-md rounded">Book</a></td>
+                                    {% endif %}
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        {% for val in list_val %}
+                            <tr class="text-center align-middle">
+                                <td><span class="glyphicon glyphicon-plane"></span></td>
+                                <td>{{ val.airlines }}</td>
+                                <td>{{ val.number }}</td>
+                                <td>{{ val.From }}</td>
+                                <td>{{ val.To }}</td>
+                                <td>{{ val.Date }}</td>
+                                <td>{{ val.Time|time:'g:i A' }}</td>
+                                <td>Rs. {{ val.Price }}</td>
+                                <td>{{ val.class_type }}</td>
+                                {% if user.is_authenticated %}
+                                <td><a href="{% url 'booking' val.id %}" class="btn btn-primary btn-md rounded">Book</a></td>
+                                {% else %}
+                                <td><a href="{% url 'login' %}" class="btn btn-primary btn-md rounded">Book</a></td>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Buses Section -->
+        <h4 class="mt-4">Buses</h4>
+        <div class="table-responsive">
+            <table class="table table-hover text-center">
+                <thead class="table-dark">
+                    <tr>
+                        <th></th>
+                        <th>Bus Operator</th>
+                        <th>Number</th>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Price</th>
+                        <th>Class</th>
+                        <th>Book</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="table-light">
+                        <td><span class="glyphicon glyphicon-bus"></span></td>
+                        <td>SRS Travels</td>
+                        <td>SR 101</td>
+                        <td>Chennai</td>
+                        <td>Hyderabad</td>
+                        <td>2024-09-25</td>
+                        <td>5:00 PM</td>
+                        <td>Rs. 1,200</td>
+                        <td>Sleeper</td>
+                        <td><button class="btn btn-primary rounded" disabled>Book</button></td>
+                    </tr>
+                    <tr class="table-light">
+                        <td><span class="glyphicon glyphicon-bus"></span></td>
+                        <td>VRL Travels</td>
+                        <td>VRL 204</td>
+                        <td>Hyderabad</td>
+                        <td>Goa</td>
+                        <td>2024-09-26</td>
+                        <td>10:00 PM</td>
+                        <td>Rs. 1,500</td>
+                        <td>Seater</td>
+                        <td><button class="btn btn-primary rounded" disabled>Book</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Trains Section -->
+        <h4 class="mt-4">Trains</h4>
+        <div class="table-responsive">
+            <table class="table table-hover text-center">
+                <thead class="table-dark">
+                    <tr>
+                        <th></th>
+                        <th>Train Operator</th>
+                        <th>Number</th>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Price</th>
+                        <th>Class</th>
+                        <th>Book</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="table-light">
+                        <td><span class="glyphicon glyphicon-train"></span></td>
+                        <td>Indian Railways</td>
+                        <td>12345</td>
+                        <td>Delhi</td>
+                        <td>Chennai</td>
+                        <td>2024-09-27</td>
+                        <td>6:00 AM</td>
+                        <td>Rs. 800</td>
+                        <td>Sleeper</td>
+                        <td><button class="btn btn-primary rounded" disabled>Book</button></td>
+                    </tr>
+                    <tr class="table-light">
+                        <td><span class="glyphicon glyphicon-train"></span></td>
+                        <td>Indian Railways</td>
+                        <td>54321</td>
+                        <td>Bangalore</td>
+                        <td>Mumbai</td>
+                        <td>2024-09-28</td>
+                        <td>9:00 PM</td>
+                        <td>Rs. 1,200</td>
+                        <td>AC 2 Tier</td>
+                        <td><button class="btn btn-primary rounded" disabled>Book</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+<style>
+    .table-hover tbody tr:hover {
+        background-color: #f8f9fa;
+        transition: background-color 0.3s;
+    }
+    .btn-primary {
+        background-color: #007bff;
+        border: none;
+    }
+    .shadow-lg {
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+</style>
+
+{% endblock content %}

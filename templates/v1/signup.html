@@ -1,0 +1,102 @@
+{% extends "v1/base.html" %}
+
+{% block content %}
+<br><br><br>
+
+{% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-danger col-md-6 offset-md-3" id="msg" role="alert">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';" style="float:right;font-size: 20px;">&times;</span> 
+        {{ message }}
+    </div>
+    {% endfor %}
+{% endif %}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg p-4" style="border-radius: 15px;">
+                <div class="text-center mb-4">
+                    <h3 class="text-primary"><b>Register</b></h3>
+                </div>
+
+                <form action="{% url 'register' %}" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="fname" class="text-dark">First Name</label>
+                        <input type="text" name="fname" id="fname" class="form-control rounded-pill" placeholder="First name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lname" class="text-dark">Last Name</label>
+                        <input type="text" name="lname" id="lname" class="form-control rounded-pill" placeholder="Last name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="uname" class="text-dark">User Name</label>
+                        <input type="text" name="uname" id="uname" class="form-control rounded-pill" placeholder="User name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" class="text-dark">Email</label>
+                        <input type="email" name="email" id="email" class="form-control rounded-pill" placeholder="abc@gmail.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password1" class="text-dark">Password</label>
+                        <input type="password" name="password1" id="password1" class="form-control rounded-pill" placeholder="Password" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password2" class="text-dark">Confirm Password</label>
+                        <input type="password" name="password2" id="password2" class="form-control rounded-pill" placeholder="Confirm password" required>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <input type="submit" class="btn btn-primary btn-lg rounded-pill px-5" value="Register">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    body {
+        background: #f0f4f8; /* Light gray background */
+        font-family: 'Roboto', sans-serif;
+    }
+
+    .card {
+        background-color: #ffffff;
+        border: none;
+    }
+
+    .form-group label {
+        font-weight: 600;
+    }
+
+    input::placeholder {
+        color: #a0a0a0;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border: none;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+    .text-primary {
+        color: #007bff !important;
+    }
+
+    .text-dark {
+        color: #333 !important;
+    }
+</style>
+
+<br><br><br>
+{% endblock content %}

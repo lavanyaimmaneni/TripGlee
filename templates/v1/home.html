@@ -1,0 +1,100 @@
+{% extends "v1/base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="container mt-5">
+    <div class="text-center mb-4">
+        <h1 style="color: #343a40;">Book Your Trip</h1>
+        <p style="color: #6c757d;">Select your cities and start your journey!</p>
+    </div>
+
+    <div class="bg-light p-4 rounded shadow-sm mb-5" style="border: 1px solid #ddd;">
+        {% if messages %}
+            <div class="alert alert-danger" id="msg" role="alert">
+                {% for message in messages %}
+                    <span class="closebtn" onclick="this.parentElement.style.display='none';" style="float:right; font-size: 1.2em;">&times;</span> 
+                    {{ message }}
+                {% endfor %}
+            </div>
+        {% endif %}
+        
+        <form action="{% url 'book' %}" method="post">
+            {% csrf_token %}
+            <div class="row mb-4 justify-content-center">
+                <div class="col-md-3">
+                    <select name="from" id="from" class="form-control" required>
+                        <option value="">From City</option>
+                        <option value="Chennai">Chennai</option>
+                        <option value="Hyderabad">Hyderabad</option>
+                        <option value="Delhi">Delhi</option>
+                        <option value="Bangalore">Bangalore</option>
+                        <option value="Mumbai">Mumbai</option>
+                        <option value="Goa">Goa</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <select name="to" id="to" class="form-control" required>
+                        <option value="">To City</option>
+                        <option value="Hyderabad">Hyderabad</option>
+                        <option value="Delhi">Delhi</option>
+                        <option value="Bangalore">Bangalore</option>
+                        <option value="Mumbai">Mumbai</option>
+                        <option value="Chennai">Chennai</option>
+                        <option value="Goa">Goa</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <button class="btn btn-primary btn-block" type="submit">Search</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="text-center mb-4">
+        <h2 style="color: #343a40;">Explore Our Cities</h2>
+    </div>
+
+    <div class="row">
+        <div class="col img-hover text-center">
+            <a href="https://en.wikipedia.org/wiki/Hyderabad">
+                <img src="{% static 'images/hyd.png' %}" class="img-fluid rounded" alt="Hyderabad" style="width: 300px; height: 200px;">
+            </a>
+            <h3 class="mt-2" style="color: #495057;">Hyderabad</h3>
+        </div>
+        <div class="col img-hover text-center">
+            <a href="https://en.wikipedia.org/wiki/Goa">
+                <img src="{% static 'images/goa.png' %}" class="img-fluid rounded" alt="Goa" style="width: 300px; height: 200px;">
+            </a>
+            <h3 class="mt-2" style="color: #495057;">Goa</h3>
+        </div>
+        <div class="col img-hover text-center">
+            <a href="https://en.wikipedia.org/wiki/Mumbai">
+                <img src="{% static 'images/mumbai.png' %}" class="img-fluid rounded" alt="Mumbai" style="width: 300px; height: 200px;">
+            </a>
+            <h3 class="mt-2" style="color: #495057;">Mumbai</h3>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col img-hover text-center">
+            <a href="https://en.wikipedia.org/wiki/Paris">
+                <img src="{% static 'images/paris.png' %}" class="img-fluid rounded" alt="Paris" style="width: 300px; height: 200px;">
+            </a>
+            <h3 class="mt-2" style="color: #495057;">Paris</h3>
+        </div>
+        <div class="col img-hover text-center">
+            <a href="https://en.wikipedia.org/wiki/Japan">
+                <img src="{% static 'images/japan.png' %}" class="img-fluid rounded" alt="Japan" style="width: 300px; height: 200px;">
+            </a>
+            <h3 class="mt-2" style="color: #495057;">Japan</h3>
+        </div>
+        <div class="col img-hover text-center">
+            <a href="https://en.wikipedia.org/wiki/United_States">
+                <img src="{% static 'images/usa.png' %}" class="img-fluid rounded" alt="USA" style="width: 300px; height: 200px;">
+            </a>
+            <h3 class="mt-2" style="color: #495057;">USA</h3>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
